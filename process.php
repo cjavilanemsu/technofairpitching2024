@@ -38,7 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $stmt->execute();
     }
 
-    echo "Pre-registration successful!"; // You can replace this with a redirect to a success page
+    // Redirect to success page after successful insertion
+    echo "Pre-registration successful!"; 
+    header("Location: successregistration.html"); 
+    exit();
 
   } catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
