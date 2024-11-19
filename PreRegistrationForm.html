@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pre-Registration for Pitching Competition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+
+    .header {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .header h2,
+    .header h3 {
+      margin: 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #34495e;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #bdc3c7;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    button:active {
+      background-color: #2471a3;
+    }
+
+    .next-button {
+      width: 100px;
+      align-self: center;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        margin: 10px;
+      }
+
+      button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>CITE TechnoFair</h2>
+    <h3>Pre-Registration for Pitching Competition</h3>
+  </div>
+  <form id="preRegistrationForm" action="process.php" method="post"> 
+    <label for="campusName">Campus Name:</label>
+    <select id="campusName" name="campusName" required>
+      <option value="" disabled selected>Select your campus</option>
+      <option value="Cagwait Campus">Cagwait Campus</option>
+      <option value="Cantilan Campus">Cantilan Campus</option>
+      <option value="Lianga Campus">Lianga Campus</option>
+      <option value="Tagbina Campus">Tagbina Campus</option>
+      <option value="Tandag Campus">Tandag Campus</option>
+    </select>
+
+    <label for="numTeams">Number of Teams:</label>
+    <input type="number" id="numTeams" name="numTeams" min="1" placeholder="Enter number of teams" required />
+
+    <button type="button" class="next-button" onclick="generateTeamFields()">Next</button>
+    <div id="teamDetails"></div>
+
+    <button type="submit" id="submitButton" style="display: none;">Submit</button> 
+  </form>
+
+  <script>
+    function generateTeamFields() {
+      const numTeams = document.getElementById('numTeams').value;
+      const teamDetailsDiv = document.getElementById('teamDetails');
+      teamDetailsDiv.innerHTML = '';
+
+      for (let i = 1; i <= numTeams; i++) {
+        const teamDiv = document.createElement('div');
+        teamDiv.innerHTML = `
+            <h4>Team ${i}</h4>
+            <label for="teamName${i}">Team Name:</label>
+            <input type="text" id="teamName${i}" name="teamName${i}" placeholder="Enter team name" required />
+            <label for="coach${i}">Coach:</label>
+            <input type="text" id="coach${i}" name="coach${i}" placeholder="Enter coach name" required />
+            <label for="teamMember${i}">Team Members:</label>
+            <input type="text" id="teamMember${i}" name="teamMember${i}" placeholder="Enter team members" required />
+          `;
+        teamDetailsDiv.appendChild(teamDiv);
+      }
+
+      // Show the submit button after generating team fields
+      document.getElementById('submitButton').style.display = 'block'; 
+    }
+  </script>
+</body>
+</html>
